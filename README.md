@@ -1,8 +1,8 @@
-# Deprecation notice
+# IMPORTANT
 
-This Action is deprecated. The action keeps working even after archiving this repo. So __existing workflows are not impacted and new workflows also work fine__. Any further enhancement or support is not planned for this action.
+The original action and source code are [here](https://github.com/microsoft/variable-substitution). It does the job well but due to deprecation the project was not updated for a long time.
 
-# GitHub Action for substituting variables in parameterized files ![.github/workflows/ci.yml](https://github.com/microsoft/variable-substitution/workflows/.github/workflows/ci.yml/badge.svg?branch=master)
+# GitHub Action for substituting variables in parameterized files
 
 With the Variable Substitution Action for GitHub, you can apply variable substitution to XML, JSON and YAML based configuration and parameter files.
 
@@ -33,7 +33,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - uses: microsoft/variable-substitution@v1 
+    - uses: keeroll/variable-substitution@v1 
       with:
         files: 'Application/*.json, Application/*.yaml, ./Application/SampleWebApplication/We*.config'
       env:
