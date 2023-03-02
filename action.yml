@@ -1,8 +1,6 @@
 # action.yml
 name: 'Config Variables Substitution'
 description: 'Apply Variable substitution in XML,JSON or YAML files. Github.com/Azure/Actions'
-icon: activity
-color: green
 inputs: 
   files:
     description: 'comma separated list of XML/JSON/YAML files in which tokens are to be substituted. Files names must be specified relative to the folder-path.'
@@ -10,3 +8,6 @@ inputs:
 runs:
   using: 'node18'
   main: 'lib/variableSubstitution.js'
+branding:
+  icon: activity
+  color: green
