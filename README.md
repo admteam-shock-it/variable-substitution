@@ -31,9 +31,9 @@ jobs:
   build:
     runs-on: windows-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
-    - uses: keeroll/variable-substitution@v1 
+    - uses: keeroll/variable-substitution@v2
       with:
         files: 'Application/*.json, Application/*.yaml, ./Application/SampleWebApplication/We*.config'
       env:
