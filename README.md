@@ -1,6 +1,6 @@
 # IMPORTANT
 
-The original action and source code are [here](https://github.com/microsoft/variable-substitution). It does the job well but due to deprecation the project was not updated for a long time.
+The original action and source code are located [here](https://github.com/microsoft/variable-substitution). It does the job well but due to deprecation the project was not updated for a long time.
 
 # GitHub Action for substituting variables in parameterized files
 
