@@ -33,7 +33,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - uses: keeroll/variable-substitution@v2
+    - uses: keeroll/variable-substitution@v2.0.2
       with:
         files: 'Application/*.json, Application/*.yaml, ./Application/SampleWebApplication/We*.config'
       env:
