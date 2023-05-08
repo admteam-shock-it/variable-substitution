@@ -41,7 +41,17 @@ export class VariableSubstitution {
                     console.log("Applying variable substitution on JSON file: " + file);
                     let jsonSubsitution =  new JsonSubstitution();
                     let jsonObject = this.fileContentCache.get(file);
-                    let isJsonSubstitutionApplied = jsonSubsitution.substituteJsonVariable(jsonObject, EnvTreeUtility.getEnvVarTree());
+
+                    let isJsonSubstitutionApplied: boolean = false;
+                    if(jsonSubsitution.validateAvailabilityEnviromentsInJson(jsonObject, EnvTreeUtility.getEnvVarTree()))
+                    {
+                        console.log(`validateAvailabilityEnviromentsInJson SUCCEEDED`);
+                        isJsonSubstitutionApplied = jsonSubsitution.substituteJsonVariable(jsonObject, EnvTreeUtility.getEnvVarTree());
+                    }
+                    else {
+                        throw new Error("Failed to validate the availability of envrionments for subsitution");
+                    }
+
                     if(isJsonSubstitutionApplied) {
                         fs.writeFileSync(file, (fileEncodeType.withBOM ? '\uFEFF' : '') + JSON.stringify(jsonObject, null, 4), { encoding: fileEncodeType.encoding });
                         console.log(`Successfully updated file: ${file}`);

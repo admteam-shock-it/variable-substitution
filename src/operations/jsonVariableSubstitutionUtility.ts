@@ -6,6 +6,33 @@ export class JsonSubstitution {
     constructor() {
         this.envTreeUtil = new EnvTreeUtility();
     }
+
+    validateAvailabilityEnviromentsInJson(jsonObject, envObject) {
+        let isValidated: boolean = false;
+
+        for (let e in envObject.child) {
+            let found: boolean = false;
+            //console.log('[ii] e' , e);
+
+            for(let jsonChild in jsonObject) {
+                let jsonChildArray = jsonChild.split('.');
+
+                const isKeywordInArray = jsonChildArray.some(i => i.toLowerCase() === e.toLowerCase());
+
+                if (isKeywordInArray) {
+                  found=true;
+                  break;
+                }
+            }
+            if(!found) {
+                core.debug(`[!] key "${e}" ENV was NOT FOUND in jsonObjext`);
+
+                return isValidated;
+            }
+        }
+
+        return !isValidated;
+    }
     
     substituteJsonVariable(jsonObject, envObject) {
         let isValueChanged: boolean = false;

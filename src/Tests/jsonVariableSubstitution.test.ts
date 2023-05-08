@@ -5,6 +5,8 @@ import { EnvTreeUtility, isPredefinedVariable } from "../operations/envVariableU
 
 import { JsonSubstitution } from "../operations/jsonVariableSubstitutionUtility";
 
+import core = require("@actions/core");
+
 var expect = chai.expect;
 
 describe('Test JSON Variable Substitution', () => {
@@ -18,7 +20,7 @@ describe('Test JSON Variable Substitution', () => {
                 [ 'data.userName', 'db_admin'],
                 [ 'data.password', 'db_pass'],
                 [ '&pl.ch@r@cter.k^y', '*.config'],
-                [ 'build.sourceDirectory', 'DefaultWorkingDirectory'],
+                //[ 'build.sourceDirectory', 'DefaultWorkingDirectory'], // Uncommenting will cause an error.
                 [ 'user.profile.name.first', 'firstName'],
                 [ 'user.profile', 'replace_all'],
                 [ 'constructor.name', 'newConstructorName'],
@@ -95,6 +97,15 @@ describe('Test JSON Variable Substitution', () => {
         };
 
         let jsonSubsitution =  new JsonSubstitution();
+
+        if(jsonSubsitution.validateAvailabilityEnviromentsInJson(jsonObject, EnvTreeUtility.getEnvVarTree()))
+        {
+            core.debug(`validateAvailabilityEnviromentsInJson SUCCEEDED`);
+        }
+        else {
+            throw new Error("Failed to validate the availability of envrionments for subsitution");
+        }
+
         isApplied = jsonSubsitution.substituteJsonVariable(jsonObject, EnvTreeUtility.getEnvVarTree());
         stub.restore();
     });
