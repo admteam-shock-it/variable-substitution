@@ -7,6 +7,15 @@ export class JsonSubstitution {
         this.envTreeUtil = new EnvTreeUtility();
     }
 
+    private isUpperCamelCase(str) {
+        // console.log(isUpperCamelCase("Alice"));        // Output: true
+        // console.log(isUpperCamelCase("MyString"));     // Output: true
+        // console.log(isUpperCamelCase("camelCase"));    // Output: false
+        // console.log(isUpperCamelCase("NotCamelCASE")); // Output: false
+        // console.log(isUpperCamelCase("UPPERCASE"));    // Output: false
+        return /^[A-Z](([a-z]+[A-Z]?)*)$/.test(str);
+    }
+
     validateAvailabilityEnviromentsInJson(jsonObject, envObject) {
         let isValidated: boolean = false;
 
@@ -14,21 +23,25 @@ export class JsonSubstitution {
             let found: boolean = false;
             //console.log('[ii] e' , e);
 
-            for(let jsonChild in jsonObject) {
-                let jsonChildArray = jsonChild.split('.');
+            if (this.isUpperCamelCase(e))
+            {
+                for(let jsonChild in jsonObject) {
+                    let jsonChildArray = jsonChild.split('.');
 
-                const isKeywordInArray = jsonChildArray.some(i => i.toLowerCase() === e.toLowerCase());
+                    const isKeywordInArray = jsonChildArray.some(i => i.toLowerCase() === e.toLowerCase());
+                    //const isKeywordInArray = jsonChildArray.some(i => i.toLowerCase().includes('_boo') && i.toLowerCase() === e.toLowerCase() + '_boo');
 
-                if (isKeywordInArray) {
-                  found=true;
-                  break;
+                    if (isKeywordInArray) {
+                      found=true;
+                      break;
+                    }
                 }
-            }
-            if(!found) {
-                core.debug(`[!] key "${e}" ENV was NOT FOUND in jsonObjext`);
-
-                return isValidated;
-            }
+                if(!found) {
+                    core.debug(`[!] key "${e}" ENV was NOT FOUND in jsonObjext`);
+    
+                    return isValidated;
+                }
+            }  
         }
 
         return !isValidated;

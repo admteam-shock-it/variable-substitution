@@ -29,7 +29,9 @@ describe('Test JSON Variable Substitution', () => {
                 [ 'profile.enabled', 'false'],
                 [ 'profile.version', '1173'],
                 [ 'profile.somefloat', '97.75'],
-                [ 'profile.preimum_level', '{"suaggar": "V4", "rok": "V5", "asranja": { "type" : "V6"}}']
+                [ 'profile.preimum_level', '{"suaggar": "V4", "rok": "V5", "asranja": { "type" : "V6"}}'],
+                ['Ala', 'z kotem'], // UpperCamelCase
+                ['KotMa', 'Alę'] // UpperCamelCase
             ]);
             let envVarTree = {
                 value: null,
@@ -93,7 +95,9 @@ describe('Test JSON Variable Substitution', () => {
                 "enabled": true,
                 "version": 2,
                 "somefloat": 2.3456
-            }
+            },
+            'Ala': 'z kotem',
+            'KotMa': 'Alę'
         };
 
         let jsonSubsitution =  new JsonSubstitution();
