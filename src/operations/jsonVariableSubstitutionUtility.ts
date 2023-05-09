@@ -16,6 +16,10 @@ export class JsonSubstitution {
         return /^[A-Z](([a-z]+[A-Z]?)*)$/.test(str);
     }
 
+    private isAtSkippedEnvList(e) {
+        return ['ImageVersion'].some(i => i.toLowerCase() === e.toLowerCase());
+    }
+
     validateAvailabilityEnviromentsInJson(jsonObject, envObject) {
         let isValidated: boolean = false;
 
@@ -25,7 +29,7 @@ export class JsonSubstitution {
             
             //let eSplited = e.split('.');
             //console.log('[ii] eSplited' , eSplited);
-            if (this.isUpperCamelCase(e))
+            if ( (this.isUpperCamelCase(e) && !this.isAtSkippedEnvList(e)) )
             {
                 console.log('[ii] e' , e);
                 for(let jsonChild in jsonObject) {
