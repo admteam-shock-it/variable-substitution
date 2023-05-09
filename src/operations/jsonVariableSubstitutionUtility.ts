@@ -21,13 +21,16 @@ export class JsonSubstitution {
 
         for (let e in envObject.child) {
             let found: boolean = false;
-            //console.log('[ii] e' , e);
-
+            console.log('[ii] e' , e);
+            
+            //let eSplited = e.split('.');
+            //console.log('[ii] eSplited' , eSplited);
             if (this.isUpperCamelCase(e))
             {
+                console.log('[ii] e' , e);
                 for(let jsonChild in jsonObject) {
                     let jsonChildArray = jsonChild.split('.');
-
+                    console.log('[ii] jsonChildArray' , e);
                     const isKeywordInArray = jsonChildArray.some(i => i.toLowerCase() === e.toLowerCase());
                     //const isKeywordInArray = jsonChildArray.some(i => i.toLowerCase().includes('_boo') && i.toLowerCase() === e.toLowerCase() + '_boo');
 
