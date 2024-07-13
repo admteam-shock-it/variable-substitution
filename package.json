@@ -40,5 +40,8 @@
     "@actions/github": "^5.1.1",
     "ltx": "^2.9.2",
     "minimatch": "^3.0.4"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }
